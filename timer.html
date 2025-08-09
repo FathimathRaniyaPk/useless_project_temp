@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chaotic Timer</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #7f00ff;
+        color: white;
+        text-align: center;
+        padding: 40px;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    .timer-setup {
+        margin: 20px auto;
+        max-width: 300px;
+        padding: 20px;
+        background: rgba(0,0,0,0.15);
+        border-radius: 10px;
+    }
+    input, select, button {
+        padding: 10px;
+        margin: 5px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+    }
+    button {
+        background: white;
+        color: #151616;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    #stopBtn {
+        position: absolute;
+        display: none;
+        background: red;
+        color: white;
+        padding: 15px 25px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    #compliment {
+        font-size: 1.2rem;
+        margin-top: 20px;
+        font-style: italic;
+    }
+</style>
+</head>
+<body>
+
+<h1>⏳ Chaotic Timer Alarm</h1>
+
+<div class="timer-setup">
+    <label>Minutes: </label>
+    <input type="number" id="minutes" min="1" value="1"><br>
+    
+    <label>Sound: </label>
+    <select id="sound">
+        <option value="weird1.mp3">Broken Robot</option>
+        <option value="weird2.mp3">Angry Goose</option>
+        <option value="weird3.mp3">Screaming Kettle</option>
+    </select><br>
+    
+    <button onclick="startTimer()">Start Timer</button>
+</div>
+
+<div id="compliment"></div>
+<button id="stopBtn" onclick="stopAlarm()">STOP</button>
+
+<audio id="alarmAudio"></audio>
+
+<script>
+    let timer;
+    let alarmTimeout;
+    let compliments = [
+        "You look like a potato… but a cute one 🥔",
+        "Congrats, you're 99% chaos and 1% coffee ☕",
+        "Your spirit animal is… a confused pigeon 🐦",
+        "You radiate 'I forgot why I walked into this room' energy 🚪",
+        "You have the grace of a shopping cart with a squeaky wheel 🛒"
+    ];
+
+    function startTimer() {
+        let minutes = parseInt(document.getElementById('minutes').value);
+        if (isNaN(minutes) || minutes <= 0) {
+            alert("Enter valid minutes!");
+            return;
+        }
+
+        let sound = document.getElementById('sound').value;
+        document.getElementById('alarmAudio').src = sound;
+
+        clearTimeout(alarmTimeout);
+        alarmTimeout = setTimeout(ringAlarm, minutes * 60 * 1000);
+        alert(`Timer set for ${minutes} minutes!`);
+    }
+
+    function ringAlarm() {
+        let complimentText = compliments[Math.floor(Math.random() * compliments.length)];
+        document.getElementById('compliment').innerText = complimentText;
+
+        let audio = document.getElementById('alarmAudio');
+        audio.loop = true;
+        audio.play();
+
+        let stopBtn = document.getElementById('stopBtn');
+        stopBtn.style.display = 'block';
+        moveStopButton();
+    }
+
+    function moveStopButton() {
+        let stopBtn = document.getElementById('stopBtn');
+        let maxX = window.innerWidth - stopBtn.offsetWidth;
+        let maxY = window.innerHeight - stopBtn.offsetHeight;
+        stopBtn.style.left = Math.random() * maxX + 'px';
+        stopBtn.style.top = Math.random() * maxY + 'px';
+
+        setTimeout(moveStopButton, 800); // Moves every 0.8s
+    }
+
+    function stopAlarm() {
+        let audio = document.getElementById('alarmAudio');
+        audio.pause();
+        audio.currentTime = 0;
+
+        document.getElementById('stopBtn').style.display = 'none';
+        document.getElementById('compliment').innerText = '';
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Procrastinator's Alarm</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: linear-gradient(to bottom right, #0f172a, #312e81, #6b21a8); }
+  </style>
+</head>
+<body class="text-white p-6">
+
+  <!-- Top Ad Banner -->
+  <div id="adBanner" class="mb-4 p-3 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
+    <div class="flex items-center">
+      <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center mr-3">💡</div>
+      <div>
+        <div class="text-sm font-semibold">Sponsored — Upgrade to Pro</div>
+        <div class="text-xs text-white/60">Remove ads & unlock advanced alarms.</div>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="document.getElementById('adBanner').style.display='none'" class="text-xs px-3 py-1 rounded-md bg-white/6 border border-white/10">Hide</button>
+      <button class="text-xs px-3 py-1 rounded-md bg-indigo-600 hover:bg-indigo-500">Upgrade</button>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-extrabold tracking-tight">Procrastinator's Alarm</h1>
+      <p class="text-sm text-white/70">Break all wake-up rules — but we’ve got your back.</p>
+    </div>
+
+    <!-- Timer Icon Button -->
+    <div class="text-right">
+      <a href="timer.html" title="Go to Timer" class="inline-block p-2 bg-white/10 rounded-full hover:bg-white/20 transition">
+        <!-- SVG Timer Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0zM9 2h6" />
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <main class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Left: Add alarm -->
+    <section class="md:col-span-1 bg-white/6 p-4 rounded-2xl border border-white/8">
+      <form onsubmit="addAlarm(); return false;" class="space-y-4">
+        <div>
+          <label class="text-xs text-white/60">Label</label>
+          <input id="labelInput" placeholder="Morning run" class="w-full mt-1 p-2 rounded-lg bg-transparent border border-white/10 placeholder-white/40" />
+        </div>
+        <div>
+          <label class="text-xs text-white/60">Time</label>
+          <input id="timeInput" type="time" class="w-full mt-1 p-2 rounded-lg bg-transparent border border-white/10" />
+        </div>
+        <div class="flex gap-2">
+          <button type="submit" class="flex-1 px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400">Set Alarm</button>
+          <button type="button" onclick="resetForm()" class="px-4 py-2 rounded-xl bg-white/6">Reset</button>
+        </div>
+      </form>
+      <div class="mt-6 text-sm text-white/70 space-y-2">
+        <div><strong>Next alarm:</strong> <span id="nextAlarm">None</span></div>
+        <div><strong>Countdown:</strong> <span id="countdown">--:--</span></div>
+      </div>
+    </section>
+
+    <!-- Right: Alarm list -->
+    <section class="md:col-span-2 bg-white/6 p-4 rounded-2xl border border-white/8">
+      <h2 class="text-lg font-semibold mb-3">Your Alarms</h2>
+      <div id="alarmList" class="space-y-3 text-sm text-white/60">
+        No alarms yet.
+      </div>
+    </section>
+  </main>
+
+  <!-- Ringing Modal -->
+  <div id="ringingModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+    <div class="bg-white/5 p-6 rounded-3xl w-[min(640px,95%)] border border-white/10 backdrop-blur-sm">
+      <h3 id="ringLabel" class="text-2xl font-bold">Alarm</h3>
+      <p id="ringTime" class="text-sm text-white/70">Time</p>
+      <div class="mt-6 flex gap-3 justify-end">
+        <button onclick="snooze(5)" class="px-4 py-2 rounded-xl bg-yellow-500">Snooze 5m</button>
+        <button onclick="snooze(10)" class="px-4 py-2 rounded-xl bg-yellow-600">Snooze 10m</button>
+        <button onclick="dismiss()" class="px-4 py-2 rounded-xl bg-red-600">Dismiss</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="alarmSound" loop>
+    <source src="alarm.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    let alarms = [];
+    let ringingAlarm = null;
+
+    function resetForm() {
+      document.getElementById('labelInput').value = '';
+      let now = new Date();
+      now.setMinutes(now.getMinutes() + 1);
+      document.getElementById('timeInput').value = now.toISOString().substring(11,16);
+    }
+
+    function addAlarm() {
+      const label = document.getElementById('labelInput').value || 'Alarm';
+      const timeStr = document.getElementById('timeInput').value;
+      if (!timeStr) return;
+      const [hh, mm] = timeStr.split(':');
+      let t = new Date();
+      t.setHours(+hh);
+      t.setMinutes(+mm);
+      t.setSeconds(0);
+      if (t < new Date()) t.setDate(t.getDate() + 1);
+
+      // Delay or early random offset (-60s to +60s)
+      const randomOffset = (Math.random() * 120 - 60) * 1000;
+      t = new Date(t.getTime() + randomOffset);
+
+      alarms.push({ label, time: t, enabled: true });
+      renderAlarms();
+    }
+
+    function renderAlarms() {
+      alarms.sort((a,b)=>a.time-b.time);
+      let html = '';
+      alarms.forEach((a,i) => {
+        html += `<div class="p-3 rounded-lg flex items-center justify-between ${a.enabled?'bg-white/3':'bg-black/10'}">
+          <div>
+            <div class="font-medium">${a.label}</div>
+            <div class="text-xs">${a.time.toLocaleString()}</div>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="toggleAlarm(${i})" class="px-3 py-1 rounded-md ${a.enabled?'bg-amber-500':'bg-white/6'}">${a.enabled?'On':'Off'}</button>
+            <button onclick="deleteAlarm(${i})" class="px-3 py-1 rounded-md bg-red-600">Delete</button>
+          </div>
+        </div>`;
+      });
+      document.getElementById('alarmList').innerHTML = html || 'No alarms yet.';
+    }
+
+    function toggleAlarm(i) {
+      alarms[i].enabled = !alarms[i].enabled;
+      renderAlarms();
+    }
+
+    function deleteAlarm(i) {
+      alarms.splice(i,1);
+      renderAlarms();
+    }
+
+    function checkAlarms() {
+      if (ringingAlarm) return;
+      const now = new Date();
+      const due = alarms.find(a => a.enabled && a.time <= now);
+      if (due) {
+        ringingAlarm = due;
+        due.enabled = false;
+        showRinging(due);
+      }
+      updateCountdown();
+    }
+
+    function showRinging(alarm) {
+      document.getElementById('ringLabel').textContent = alarm.label;
+      document.getElementById('ringTime').textContent = alarm.time.toLocaleString();
+      document.getElementById('ringingModal').classList.remove('hidden');
+      document.getElementById('alarmSound').play();
+    }
+
+    function dismiss() {
+      ringingAlarm = null;
+      document.getElementById('ringingModal').classList.add('hidden');
+      document.getElementById('alarmSound').pause();
+    }
+
+    function snooze(mins) {
+      const t = new Date(Date.now() + mins * 60000);
+      alarms.push({ label: ringingAlarm.label + ' (snooze)', time: t, enabled: true });
+      dismiss();
+      renderAlarms();
+    }
+
+    function updateCountdown() {
+      const next = alarms.filter(a=>a.enabled).sort((a,b)=>a.time-b.time)[0];
+      document.getElementById('nextAlarm').textContent = next ? `${next.label} — ${next.time.toLocaleTimeString()}` : 'None';
+      if (next) {
+        const diff = Math.max(0, Math.floor((next.time - new Date()) / 1000));
+        const m = String(Math.floor(diff/60)).padStart(2,'0');
+        const s = String(diff%60).padStart(2,'0');
+        document.getElementById('countdown').textContent = `${m}:${s}`;
+      } else {
+        document.getElementById('countdown').textContent = '--:--';
+      }
+    }
+
+    // Init
+    resetForm();
+    setInterval(checkAlarms, 1000);
+  </script>
+</body>
+</html>

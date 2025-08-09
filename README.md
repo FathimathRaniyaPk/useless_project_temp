@@ -1,42 +1,48 @@
 <img width="3188" height="1202" alt="frame (3)" src="https://github.com/user-attachments/assets/517ad8e9-ad22-457d-9538-a9e62d137cd7" />
 
 
-# [Project Name] 🎯
+# MindaPoocha
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: Cloudora
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Team Lead: Fathimath Raniya Pk - Government engineering college, sreekrishnapuram
+- Member 2: Thresia Stefi - Government engineering college, sreekrishnapuram
 
 ### Project Description
-[2-3 lines about what your project does]
+Minda Poocha — The Alarm That Thinks It’s Funny!
+
+Minda Poocha — The Alarm That Thinks It’s Funny!
+Set your alarm for 7 AM? Nah, Minda Poocha will wake you at 7 PM instead — just to keep things spicy. Snooze button? More like confuse button. Want 5 minutes? Get ready for a surprise 30-minute nap instead!
+
+It’s the alarm that’s always late, never listens, and basically throws a wild party when you’re supposed to be waking up. Perfect if you love chaos, surprises, and waking up wondering, “Did I even set an alarm?”
+
+Minda Poocha: Because normal alarms are just too boring. 😂⏰🎉
+
+
 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+In a world obsessed with punctuality, Minda Poocha tackles the “problem” of overly predictable alarms that kill your morning vibe. It injects chaos and surprise into your wake-up routine, helping you embrace unpredictability instead of boring routine. Because sometimes, the real problem is being too on time.
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+
+Minda Poocha solves the non-problem of boring, obedient alarms by randomly messing with your wake-up time—because who wants predictability anyway? It turns snooze into a guessing game and makes every morning an unexpected adventure. Finally, an alarm that refuses to listen, just like your inner procrastinator.
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+-  We used HTML for the framework and structure of the app.
 
-For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
+- CSS (with Tailwind) was used for styling and creating a modern, responsive UI.
+
+- JavaScript powers the alarm logic, interactivity, timing functions, and user input handling.
+  
 
 ### Implementation
-For Software:
+For Software:Build a simple webpage with a funny alarm title and quotes. Let users set an alarm time, but the app purposely rings at the wrong time (AM alarms ring in PM). The snooze button works unpredictably, and the alarm sound plays until stopped. Use HTML for layout, CSS for style, and JavaScript to handle time checking, sound playing, and page navigation.
 # Installation
 [commands]
 

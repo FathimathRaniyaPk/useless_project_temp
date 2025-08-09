@@ -70,8 +70,8 @@ This is the third page of our project the only useful yet practically useless fe
 
 ### Project Demo
 # Video
-
-*Explain what the video demonstrates*
+https://drive.google.com/file/d/1FEkuAJyZleETWTMHqhK7dHEyRj8X87iv/view?usp=sharing
+Our video walks you through the full ‘Minda Poocha’ experience  an alarm app inspired by the Malayalam proverb ‘മിണ്ടാപ്പൂച്ച  കലമുടയ്ക്കും’. The first page sets the tone, breaking all boring wake-up rules. The second page is your alarm control center, where you set, manage, and play with unconventional alarms  with the tempting option to upgrade to Pro for even more chaos. The third page is our crown jewel of absurdity: the Chaotic Timer Alarm, where the Stop button floats around the screen, daring you to catch it while you’re busy with something important. The video shows how each page works in real time from setting alarms to chasing a runaway Stop button  proving that waking up (or working) doesn’t have to be ordinary and if you’re willing to test our app, be prepared… because you’ll never really know when it will ring."
 
 
 

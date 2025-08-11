@@ -53,50 +53,36 @@ For Software:Build a simple webpage with a funny alarm title and quotes. Let use
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+!<img width="1846" height="848" alt="Screenshot 2025-08-09 161524" src="https://github.com/user-attachments/assets/08abf27e-ee2a-497e-bbb1-e1b5bb03138f" />
+  first.html
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+This is the first page of our app, inspired by the Malayalam proverb ‘മിണ്ടാപ്പൂച്ച കലമുടയ്ക്കും’ (Even the quiet cat will act when the time comes). Just like the proverb, our alarm breaks all boring wake-up rules quiet until it’s time to surprise you, because normal alarms are too predictable.
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+!<img width="1854" height="835" alt="Screenshot 2025-08-09 161320" src="https://github.com/user-attachments/assets/3107acfe-09ed-4e28-9bc8-74a6c1710031" />
+  home.html
+This is the second page of our app  the control hub for your unconventional wake-ups. Here you set, manage and tweak all your alarms. Whether it’s for a morning run, study jam, or a spontaneous outing, this page keeps your ‘Minda Poocha’ spirit alive by making sure no alarm is just… ordinary and if you like, you can upgrade to the Pro version  if you want even more chaos with this.
 
-# Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
+!<img width="1849" height="825" alt="Screenshot 2025-08-09 155157" src="https://github.com/user-attachments/assets/a923b3b2-82aa-4b21-bcbc-11e0409cdb31" />
+ timer.html
+This is the third page of our project the only useful yet practically useless feature in our project. Set a timer then pick a sound and wait… but here’s the twist: the Stop button won’t stay still. It floats across the screen, dodging your clicks. Perfect for adding chaos to your most important tasks  because why not make life harder in the most entertaining way possible?"
 
-For Hardware:
 
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-# Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
+https://drive.google.com/file/d/1FEkuAJyZleETWTMHqhK7dHEyRj8X87iv/view?usp=sharing
+Our video walks you through the full ‘Minda Poocha’ experience  an alarm app inspired by the Malayalam proverb ‘മിണ്ടാപ്പൂച്ച  കലമുടയ്ക്കും’. The first page sets the tone, breaking all boring wake-up rules. The second page is your alarm control center, where you set, manage, and play with unconventional alarms  with the tempting option to upgrade to Pro for even more chaos. The third page is our crown jewel of absurdity: the Chaotic Timer Alarm, where the Stop button floats around the screen, daring you to catch it while you’re busy with something important. The video shows how each page works in real time from setting alarms to chasing a runaway Stop button  proving that waking up (or working) doesn’t have to be ordinary and if you’re willing to test our app, be prepared… because you’ll never really know when it will ring."
 
-# Additional Demos
-[Add any extra demo materials/links]
+
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- Fathimath Raniya Pk : Styled the app using CSS to create the unique look and feel.
+                          Created the page navigation between home and alarm pages.
+
+- Thresia Stefi: Designed the opening page with the app name, quotes, and Go button
+                  Integrated Google Fonts for the custom font style.
+
+- both of us create this idea to make fun but useless.
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 
